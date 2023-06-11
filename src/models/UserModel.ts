@@ -12,7 +12,9 @@ const userModel = new mongoose.Schema({
     isAvaliable: {type:Boolean, required: true},
     interest: String,
     email: {type: String, required: true, unique: true},
-    password: {type: String , required: true} 
+    password: {type: String , required: true},
+    createdAt: {type: Date, default: Date.now},
+    updatedAt: Date 
 });
 
 const User = mongoose.model('user',userModel);

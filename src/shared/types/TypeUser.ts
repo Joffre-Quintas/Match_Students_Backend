@@ -15,4 +15,5 @@ export default interface IUser {
     confirmPassword?: string,
     tutor?: string,
     student?: string
+    updatedAt?: Date
 }
