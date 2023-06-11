@@ -3,7 +3,9 @@ import User from '../models/UserModel';
 import IUser from '../shared/types/TypeUser';
 import { Request, Response } from 'express';
 
+
 import verifyExist from '../shared/utils/verifyExist';
+import cryptPassword from '../shared/utils/cryptPassword';
 class UserControllers {
     static async createUser(req: Request, res: Response) {
         const newUser:IUser  = req.body;
@@ -19,9 +21,9 @@ class UserControllers {
         if(await verifyExist({email:email} || await verifyExist({registrationNumber: registrationNumber}))) { 
             return res.status(422).json({msg: 'Usuário já cadastrado.'})
         }
-
+        //Crypt password. I do a util async function 'cryptPassword' and replace than newUser inside a create. Line '26'
         //Create User
-        await User.create(newUser)
+        await User.create(await cryptPassword(newUser, password))
         res.status(StatusCodes.OK).json({msg:'Usuário cadastrado!'})
     }
 }
