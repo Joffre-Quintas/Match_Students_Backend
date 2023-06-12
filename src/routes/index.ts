@@ -8,5 +8,6 @@ router.get('/', (_,res: Response) => {
     res.status(StatusCodes.OK).json({msg: 'Rota inicial'});
 });
 router.post('/registration', UserControllers.createUser)
+router.post('/login', UserControllers.login)
 
 export default router;
