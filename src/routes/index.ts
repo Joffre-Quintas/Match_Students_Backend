@@ -1,6 +1,7 @@
 import { Router, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import UserControllers from '../controllers/UserControllers';
+import authenticate from '../shared/middlewares/authenticate';
 
 const router = Router();
 
@@ -9,5 +10,9 @@ router.get('/', (_,res: Response) => {
 });
 router.post('/registration', UserControllers.createUser)
 router.post('/login', UserControllers.login)
+
+router.get('/private', authenticate ,(req,res) => {
+    res.json({msg: 'Private'})
+})
 
 export default router;

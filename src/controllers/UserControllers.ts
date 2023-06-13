@@ -56,7 +56,10 @@ class UserControllers {
                     {
                         id: userData._id
                     },
-                    secret
+                    secret,
+                    // {
+                    //     expiresIn: '7d'
+                    // }
                 )
                 res.status(StatusCodes.OK).json({token})
             }
