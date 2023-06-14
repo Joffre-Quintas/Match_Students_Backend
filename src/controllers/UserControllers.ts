@@ -13,19 +13,7 @@ import { ErrorMessages } from '../shared/utils/ErrorMessages'
 class UserControllers {
     static async createUser(req: Request, res: Response) {
         const newUser:IUser  = req.body;
-        const { completeName, registrationNumber, birthday, phone, period, turn, course, isAvaliable, email, password } = newUser;
-        
-        //Validations
-        if(!completeName || !registrationNumber || !birthday || !phone || !period || !turn || !course || !isAvaliable || !email || !password) {
-            return res.status(StatusCodes.BAD_REQUEST).json({msg: 'Preencha todos os campos.'})
-        }
-        if(await verifyExist({phone: phone})) {
-            return res.status(422).json({msg: 'Telefone já cadastrado.'})
-        }
-        if(await verifyExist({email:email} || await verifyExist({registrationNumber: registrationNumber}))) { 
-            return res.status(422).json({msg: ErrorMessages.userExist})
-        }
-        
+        const { password } = newUser;
         try {
             //Crypt password. I do an util async function 'cryptPassword' and replace than newUser inside a create. Line '27'
             //Create User
