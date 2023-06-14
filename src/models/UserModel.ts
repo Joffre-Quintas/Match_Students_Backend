@@ -13,6 +13,8 @@ const userModel = new mongoose.Schema({
     interest: String,
     email: {type: String, required: true, unique: true},
     password: {type: String , required: true},
+    tutor: [String],
+    student: [String],
     createdAt: {type: Date, default: Date.now},
     updatedAt: Date 
 });
