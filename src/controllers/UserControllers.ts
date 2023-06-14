@@ -67,6 +67,10 @@ class UserControllers {
             console.log(err)
         }
     }
+    static async ListAllStudents(req: Request, res: Response) {
+        const allStudents = await User.find({},{password: 0, createdAt: 0, updatedAt: 0, birthday: 0})
+        res.status(StatusCodes.OK).json(allStudents)
+    }
 }
 
 export default UserControllers;

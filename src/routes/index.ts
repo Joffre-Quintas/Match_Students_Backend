@@ -10,6 +10,7 @@ router.get('/', (_,res: Response) => {
 });
 router.post('/registration', UserControllers.createUser)
 router.post('/login', UserControllers.login)
+router.get('/home', UserControllers.ListAllStudents)
 
 router.get('/private', authenticate ,(req,res) => {
     res.json({msg: 'Private'})
