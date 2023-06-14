@@ -72,8 +72,25 @@ class UserControllers {
     }
     //Some camps was excluded for security
     static async ListAllStudents(req: Request, res: Response) {
+        interface IStudent {
+            period: number
+        }
         const allStudents = await User.find({},{password: 0, createdAt: 0, updatedAt: 0, birthday: 0})
-        res.status(StatusCodes.OK).json(allStudents)
+        const studentsByPeriod:{[key: number]:IStudent[]} = {
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+            6: [],
+            7: [],
+            8: []
+        }
+        allStudents.forEach(student => {
+            const { period } = student;
+            studentsByPeriod[period].push(student)
+        })
+        res.status(StatusCodes.OK).json(studentsByPeriod)
     }
 }
 
