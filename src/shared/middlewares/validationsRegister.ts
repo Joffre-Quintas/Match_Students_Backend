@@ -31,6 +31,9 @@ export default async function validationRegister(req: Request, res: Response, ne
     if(!regex.email.test(email)) {
         return res.status(StatusCodes.NOT_ACCEPTABLE).json({msg: ErrorMessages.invalidFormat})
     }
+    if(period <= 0 || period > 8 ) {
+        return res.status(StatusCodes.NOT_ACCEPTABLE).json({msg: ErrorMessages.invalidFormat})
+    }
 
     next()
 }

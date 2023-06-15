@@ -80,6 +80,11 @@ class UserControllers {
         })
         res.status(StatusCodes.OK).json(studentsByPeriod)
     }
+    //In frontend, the user let load using array of User on contextAPI. Verify which token match id and load data.
+    static async updateRegister(req: Request, res: Response) {
+        const updateUser = req.body;
+        await User.findByIdAndUpdate(updateUser._id, updateUser)
+    }
 }
 
 export default UserControllers;

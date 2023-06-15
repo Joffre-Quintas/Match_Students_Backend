@@ -12,6 +12,7 @@ router.get('/', (_,res: Response) => {
 router.post('/registration', validationRegister, UserControllers.createUser)
 router.post('/login', UserControllers.login)
 router.get('/home', UserControllers.ListAllStudents)
+router.post('/registration/update', authenticate, UserControllers.updateRegister)
 
 router.get('/private', authenticate ,(req,res) => {
     res.json({msg: 'Private'})
