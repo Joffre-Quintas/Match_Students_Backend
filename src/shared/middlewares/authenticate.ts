@@ -6,7 +6,6 @@ export default async function authenticate(req: Request,res: Response, next:Next
     const auth = req.headers.token as string;
     const secret = process.env.SECRET as string;
 
-    console.log(auth)
     if(!auth){
         return res.status(StatusCodes.NOT_FOUND).json({msg: 'Necessário realizar o login.'})
     }

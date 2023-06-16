@@ -82,8 +82,22 @@ class UserControllers {
     }
     //In frontend, the user let load using array of User on contextAPI. Verify which token match id and load data.
     static async updateRegister(req: Request, res: Response) {
-        const updateUser = req.body;
-        await User.findByIdAndUpdate(updateUser._id, updateUser)
+        const secret = process.env.SECRET as string;
+        const token = req.headers.token as string;
+        const  dataUpdated =  req.body;
+
+        const data = await jwt.verify(token,secret) as {id:string}
+        const userId = data.id;
+        const userUpdated = await {
+            ...dataUpdated,
+            updateAt: Date.now()
+        }
+        try {
+            await User.findOneAndUpdate({ _id: userId }, await cryptPassword(userUpdated, dataUpdated.password))
+            res.status(201).json({msg: 'Cadastro atualizado com sucesso!'})
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 
