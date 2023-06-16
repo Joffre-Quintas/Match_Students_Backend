@@ -90,7 +90,7 @@ class UserControllers {
         const userId = data.id;
         const userUpdated = await {
             ...dataUpdated,
-            updateAt: Date.now()
+            updatedAt: Date.now()
         }
         try {
             await User.findOneAndUpdate({ _id: userId }, await cryptPassword(userUpdated, dataUpdated.password))
