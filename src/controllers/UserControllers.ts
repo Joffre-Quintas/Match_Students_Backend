@@ -84,8 +84,8 @@ class UserControllers {
     static async updateRegister(req: Request, res: Response) {
         const secret = process.env.SECRET as string;
         const token = req.headers.token as string;
-        const  dataUpdated =  req.body;
-
+        const dataUpdated =  req.body;
+        
         const data = await jwt.verify(token,secret) as {id:string}
         const userId = data.id;
         const userUpdated = await {
@@ -98,6 +98,11 @@ class UserControllers {
         } catch (err) {
             console.log(err)
         }
+    }
+    static async findAStudent(req: Request, res: Response) {
+        const { registrationNumber } = await  req.body;
+        const student = await User.findOne({registrationNumber: registrationNumber })        
+        res.json(student)
     }
 }
 

@@ -10,7 +10,7 @@ export default async function authenticate(req: Request,res: Response, next:Next
         return res.status(StatusCodes.NOT_FOUND).json({msg: 'Necessário realizar o login.'})
     }
     try {
-        await jwt.verify(auth, secret ) 
+        await jwt.verify(auth, secret) 
         next()        
     } catch (err) {
         return res.status(StatusCodes.UNAUTHORIZED).json({msg: 'Token inválido!'})
