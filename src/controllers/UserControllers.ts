@@ -52,7 +52,7 @@ class UserControllers {
                     //     expiresIn: '7d'
                     // }
                 )
-                res.status(StatusCodes.OK).json({token})
+                res.status(StatusCodes.OK).json({token:token, completeName: userData.completeName})
             }
         } catch (err) {
             console.log(err)
