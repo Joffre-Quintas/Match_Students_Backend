@@ -14,9 +14,8 @@ router.post('/login', UserControllers.login)
 router.get('/home', UserControllers.ListAllStudents)
 router.put('/registration/update', authenticate, UserControllers.updateRegister)
 router.get('/findastudent', UserControllers.findAStudent)
+router.get('/finduserbyjwt', UserControllers.findUserByJWT)
 
-router.get('/private', authenticate ,(req,res) => {
-    res.json({msg: 'Private'})
-})
+
 
 export default router;

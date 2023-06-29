@@ -9,7 +9,7 @@ const userModel = new mongoose.Schema({
     turn: {type: String, required: true },
     course:{type: String, required: true},
     knowledge: [String],
-    isAvaliable: {type:Boolean, required: true},
+    isAvailable: {type:Boolean, required:true},
     interest: [String],
     email: {type: String, required: true, unique: true},
     password: {type: String , required: true},

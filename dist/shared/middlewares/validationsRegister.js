@@ -10,14 +10,14 @@ const verifyExist_1 = __importDefault(require("../utils/verifyExist"));
 const regex_1 = require("../utils/regex");
 async function validationRegister(req, res, next) {
     const newUser = req.body;
-    const { completeName, registrationNumber, birthday, phone, period, turn, course, isAvaliable, email, password } = newUser;
-    if (!completeName || !registrationNumber || !birthday || !phone || !period || !turn || !course || !isAvaliable || !email || !password) {
+    const { completeName, registrationNumber, birthday, phone, period, turn, course, isAvailable, email, password } = newUser;
+    if (!completeName || !registrationNumber || !birthday || !phone || !period || !turn || !course || !isAvailable || !email || !password) {
         return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ msg: 'Preencha todos os campos.' });
     }
     if (await (0, verifyExist_1.default)({ registrationNumber: registrationNumber })) {
         return res.status(422).json({ msg: ErrorMessages_1.ErrorMessages.userExist });
     }
-    if (registrationNumber.lenght != 8) {
+    if (registrationNumber.length != 8) {
         return res.status(http_status_codes_1.StatusCodes.NOT_ACCEPTABLE).json({ msg: ErrorMessages_1.ErrorMessages.invalidFormat });
     }
     if (await (0, verifyExist_1.default)({ phone: phone })) {

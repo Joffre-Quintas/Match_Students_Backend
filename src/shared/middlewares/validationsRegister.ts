@@ -8,15 +8,15 @@ import { regex } from '../utils/regex';
 
 export default async function validationRegister(req: Request, res: Response, next: NextFunction) {
     const newUser = req.body;
-    const { completeName, registrationNumber, birthday, phone, period, turn, course, isAvaliable, email, password } = newUser;
+    const { completeName, registrationNumber, birthday, phone, period, turn, course, isAvailable, email, password } = newUser;
     
-    if(!completeName || !registrationNumber || !birthday || !phone || !period || !turn || !course || !isAvaliable || !email || !password) {
+    if(!completeName || !registrationNumber || !birthday || !phone || !period || !turn || !course || !isAvailable || !email || !password) {
         return res.status(StatusCodes.BAD_REQUEST).json({msg: 'Preencha todos os campos.'})
     }
     if(await verifyExist({registrationNumber: registrationNumber})) {
         return res.status(422).json({msg: ErrorMessages.userExist})
     }
-    if(registrationNumber.lenght != 8){
+    if(registrationNumber.length != 8){
         return res.status(StatusCodes.NOT_ACCEPTABLE).json({msg: ErrorMessages.invalidFormat})
     }
     if(await verifyExist({phone: phone})) {

@@ -73,12 +73,11 @@ class UserControllers {
         });
         res.status(http_status_codes_1.StatusCodes.OK).json(studentsByPeriod);
     }
-    //In frontend, the user let load using array of User on contextAPI. Verify which token match id and load data.
     static async updateRegister(req, res) {
         const secret = process.env.SECRET;
         const token = req.headers.token;
         const dataUpdated = req.body;
-        const data = await jsonwebtoken_1.default.verify(token, secret);
+        const data = jsonwebtoken_1.default.verify(token, secret);
         const userId = data.id;
         const userUpdated = await {
             ...dataUpdated,
@@ -91,6 +90,13 @@ class UserControllers {
         catch (err) {
             console.log(err);
         }
+    }
+    static async findUserByJWT(req, res) {
+        const secret = process.env.SECRET;
+        const { token } = req.body;
+        const { id } = jsonwebtoken_1.default.verify(token, secret);
+        const user = await UserModel_1.default.findOne({ _id: id }, { password: 0, createdAt: 0, updatedAt: 0, birthday: 0 });
+        res.status(http_status_codes_1.StatusCodes.OK).json(user);
     }
     static async findAStudent(req, res) {
         const { registrationNumber } = await req.body;
