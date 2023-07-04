@@ -14,7 +14,7 @@ router.post('/login', UserControllers.login)
 router.get('/home', UserControllers.ListAllStudents)
 router.put('/registration/update', authenticate, UserControllers.updateRegister)
 router.get('/findastudent', UserControllers.findAStudent)
-router.get('/finduserbyjwt', UserControllers.findUserByJWT)
+router.get('/finduserbyjwt/:token', UserControllers.findUserByJWT)
 
 
 

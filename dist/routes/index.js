@@ -17,5 +17,5 @@ router.post('/login', UserControllers_1.default.login);
 router.get('/home', UserControllers_1.default.ListAllStudents);
 router.put('/registration/update', authenticate_1.default, UserControllers_1.default.updateRegister);
 router.get('/findastudent', UserControllers_1.default.findAStudent);
-router.get('/finduserbyjwt', UserControllers_1.default.findUserByJWT);
+router.get('/finduserbyjwt/:token', UserControllers_1.default.findUserByJWT);
 exports.default = router;

@@ -93,9 +93,9 @@ class UserControllers {
     }
     static async findUserByJWT(req, res) {
         const secret = process.env.SECRET;
-        const { token } = req.body;
+        const { token } = req.params;
         const { id } = jsonwebtoken_1.default.verify(token, secret);
-        const user = await UserModel_1.default.findOne({ _id: id }, { password: 0, createdAt: 0, updatedAt: 0, birthday: 0 });
+        const user = await UserModel_1.default.findOne({ _id: id }, { password: 0, createdAt: 0, updatedAt: 0 });
         res.status(http_status_codes_1.StatusCodes.OK).json(user);
     }
     static async findAStudent(req, res) {
